@@ -37,3 +37,35 @@
           ((and first-word? (eq? word 'you)) 'I)
           ((eq? word 'you) 'me)
           (else word)))
+
+; 4. Write a predicate ordered? that takes a sentence of numbers
+; as its argument and returns a true value if the numbers are
+; in ascending order, or a false value otherwise.
+
+(define (ordered? numbers)
+    (check-order (cdr numbers) (first numbers)))
+
+(define (check-order numbers last-number)
+    (if (null? numbers)
+      #t
+      (if (> last-number (first numbers))
+        #f
+        (check-order (cdr numbers) (first numbers)))))
+
+; 5. Write a procedure ends-e that takes a sentence as its argument
+; and returns a sentence containing only those words of the argument
+; whose last letter is E:
+; > (ends-e ’(please put the salami above the blue elephant)) (please the above the blue)
+
+(define (ends-e sentence)
+    (check-ends-e sentence '()))
+
+(define (check-ends-e sentence acc)
+    (if (null? sentence)
+        acc
+        (if (e-last? (first sentence))
+            (check-ends-e (cdr sentence) (append acc (list (first sentence))))
+            (check-ends-e (cdr sentence) acc))))
+
+(define (e-last? word)
+    (eq? (last (string->list (symbol->string word))) #\e))
