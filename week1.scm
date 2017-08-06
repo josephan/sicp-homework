@@ -22,9 +22,18 @@
 ; (i told you that you should wake me up)
 
 (define (switch sentence)
-    (switch-sentence (reverse sentence)))
+    (switch-sentence (reverse sentence) '()))
 
-(define (switch-sentence sentence '()))
+(define (switch-sentence sentence acc)
+    (if (null? sentence)
+        acc
+        (switch-sentence
+            (cdr sentence)
+            (cons (switch-word (first sentence) (eq? (length sentence) 1)) acc)) ))
 
-(define (switch-word word)
-    (cond (equal? word 'I)))
+(define (switch-word word first-word?)
+    (cond ((eq? word 'I) 'you)
+          ((eq? word 'me) 'you)
+          ((and first-word? (eq? word 'you)) 'I)
+          ((eq? word 'you) 'me)
+          (else word)))
