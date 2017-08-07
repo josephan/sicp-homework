@@ -69,3 +69,18 @@
 
 (define (e-last? word)
     (eq? (last (string->list (symbol->string word))) #\e))
+
+; 6. devise a test that will tell you whether Scheme’s and
+; and or are special forms or ordinary functions
+(define (true-procedure) (= 0 0))
+(define (false-procedure) (= 0 1))
+
+(define (or-test procedure) (or (procedure) (or-test procedure)))
+(define (and-test procedure) (and (procedure) (and-test procedure)))
+
+; (or-test true-procedure) should return true if Scheme's and are special forms because it won't infinitely loop
+; (and-test false-procedure) should return false if Scheme's or are special forms because it won't infinitely loop
+
+; However (or-test false-procedure) and (and-test true-procedure) will infinitely loop
+
+
