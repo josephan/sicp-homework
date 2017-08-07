@@ -14,6 +14,7 @@ I'm trying to
  - take final: http://wla.berkeley.edu/~cs61a/reader/vol2.html
 
 Homepage: http://wla.berkeley.edu/~cs61a/sp11/  
+Course Schedule: http://inst.eecs.berkeley.edu/~cs61a/su11/
 Homework solutions:
  - sicp wiki: http://sicp.org.ua/sicp/
  - Solutions from summer 2011 seems to be missing.
