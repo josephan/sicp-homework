@@ -40,15 +40,14 @@
     (define (fact-next n) (+ n 1))
     (accum-product fact-term 1 fact-next i))
 
-; 1.3
+; 1.33
 ; filtered accumulate
 (define (filtered-accumulate filter combiner null-value term a next b)
     (if (> a b)
         null-value
         (if (filter a)
-          (combiner (term a)
-                  (accumulate filter combiner null-value term (next a) next b))
-          (accumulate filter combiner null-value term (next a) next b))))
+          (combiner (term a) (filtered-accumulate filter combiner null-value term (next a) next b))
+          (filtered-accumulate filter combiner null-value term (next a) next b))))
 
 ; simple procedure that determines if given argument is a prime number
 (define (prime? n)
@@ -68,5 +67,5 @@
 
 (define (sum-of-square-of-primes a b)
     (define (square x) (* x x))
-    (define (plus-one i) (i + 1))
+    (define (plus-one x) (+ x 1))
     (filtered-accumulate prime? + 0 square a plus-one b))
